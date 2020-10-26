@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style2.css"/>
+  <link rel="stylesheet" href="progress.css" />
+  <style>
+    .mussicard-extended .detail .song {
+      font-size: 14px;
+
+    }
+
+    .mussicard-extended .detail .artist {
+      font-size: 10px;
+    }
+    
+    .chis span{
+      color: white !important;
+      background: #E23490 !important;
+      border-radius: 100%;
+      padding: 2px;
+    }
+    musiccard .player{
+    width: 50px;
+    height:50px;
+    border-radius: 25px;
+    top: 30%;
+    left: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transform: translateX(-120%);
+    }
+    *:active{
+    background: white !important;
+    }
+  </style>
+      <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-storage.js"></script>
+      
+  <title>Page Title</title>
+</head>
+
+<body class="" style="padding: 15px">
+  <div class="">
+    <div class="row">
+      <div class="row download-card z-depth-2 grey darken-4">
+        <div class="col s12">
+          <div class="row">
+            <!-- dwn image column -->
+            <div class="col s5">
+              <label for='thumbnail'>
+                <Img src="file:///storage/emulated/0/Download/images%20(41).jpeg" class="preview">
+              </label>
+                <input type="file" id='thumbnail' class=''>
+                <div class="progresscontainer">
+                  <progress min="0" max="100" value='1'>
+                    45%
+                  </progress>
+                </div>
+            </div>
+            <div class="col s7">
+              <p class="song-title white-text song" contenteditable>Money fit me</p>
+              <p class="song-artist artist"><a contenteditable>Syno</a></h3>
+                <div class="divider"></div>
+                <br>
+                <div class="row">
+                  <div class="col s4 center-align activity-detail">
+                    <i class="material-icons hide">
+                      play
+                    </i>
+                    <span contenteditable class="white-text lcount">234</span>
+                    <p>Likes</p>
+                  </div>
+                  <div class="col s4 center-align activity-detail">
+                    <i class="material-icons hide">
+                      favorite
+                    </i>
+                    <span contenteditable class="white-text ccount">123k</span>
+                    <p>Comments</p>
+                  </div>
+                  <div class="col s4 center-align activity-detail">
+                    <i class="material-icons hide">
+                      favorite
+                    </i>
+                    <span contenteditable class="white-text pcount"aaaaap>20k</span>
+                    <p>Played</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- comment section-->
+      <input type="file" id='audio' class=''>
+          <div class="progresscontainer audioprogress">
+            <progress min="0" max="100" value='1'>
+              45%
+            </progress>
+          </div>
+      <input type='date' id='date'>
+      <div class="comment-section nomargin">
+        <p>
+          <label>
+            <input type="checkbox" checked="checked" id="collab" />
+            <span>Collobration</span>
+          </label>
+        </p>
+        <!-- comment box-->
+        <br>
+        <form class="comment-box relative">
+          <div class="chis white fake-input z-depth-1 grey-text l" placeholder="leave a comment" contenteditable class='artists' data-type='artists'>Artists</div>
+          <textarea class="input z-depth-1 white grey-text darken-1 nomargin" placeholder="leave your thoughts"></textarea>
+          <span class="comment-icon pink hide">
+            <i class="material-icons white-text">people</i>
+            <span class="vert-divider"></span>
+          </span>
+        </form>
+        <br />
+        <form class="comment-box relative">
+          <div class="chis white fake-input z-depth-1 grey-text l" placeholder="leave a comment" contenteditable class='countries' data-type="countries">Countries</div>
+          <textarea class="input z-depth-1 white grey-text darken-1 nomargin" placeholder="leave your thoughts"></textarea>
+          <span class="comment-icon pink hide">
+            <i class="material-icons white-text">language</i>
+            <span class="vert-divider"></span>
+          </span>
+        </form>
+        <br />
+        <form class="comment-box relative">
+          <div class="chis white fake-input z-depth-1 grey-text l" placeholder="leave a comment" contenteditable class='gerne' data-type='gerne'>Gerne</div>
+          <textarea class=" input z-depth-1 white grey-text darken-1 nomargin" placeholder="leave your thoughts"></textarea>
+          <span class="comment-icon pink hide">
+            <i class="material-icons white-text">settings</i>
+            <span class="vert-divider"></span>
+          </span>
+        </form>
+        <br>
+        <center><button id="submit" class="btn pink">Submit</button></center>
+        <!-- extended card start -->
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+           https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+      <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyCRmErwYDpaz_1QvHEZYmhTVnLmtAsWzU8",
+          authDomain: "boxbeat-f36de.firebaseapp.com",
+          databaseURL: "https://boxbeat-f36de.firebaseio.com",
+          projectId: "boxbeat-f36de",
+          storageBucket: "boxbeat-f36de.appspot.com",
+          messagingSenderId: "978118242334",
+          appId: "1:978118242334:web:4ea1e38988a21605993e0f",
+          measurementId: "G-W0F20R2FMR"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        var db = firebase.firestore();
+        var storage = firebase.storage();
+      </script>
+      <script src="main.js"></script>
+</body>
+
+</html>
